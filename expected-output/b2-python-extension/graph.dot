@@ -1,0 +1,9 @@
+digraph nexus_demo {
+  rankdir=LR;
+  graph [fontname="Helvetica"];
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  "cpython:nexus_bench.b2_python_extension" [shape=box,style=rounded];
+  "native:_nexus_bench_ext" [shape=box,style=rounded];
+  "cpython:nexus_bench.b2_python_extension" -> "native:_nexus_bench_ext" [label="direct"];
+}

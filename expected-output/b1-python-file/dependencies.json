@@ -1,0 +1,11 @@
+{
+  "schema": "nexus.expected-dependencies.v1",
+  "benchmark": "b1-python-file",
+  "dependencies": [
+    {
+      "source": "cpython:nexus_bench.b1_python_file.producer",
+      "target": "cpython:nexus_bench.b1_python_file.consumer",
+      "mechanism": "file"
+    }
+  ]
+}

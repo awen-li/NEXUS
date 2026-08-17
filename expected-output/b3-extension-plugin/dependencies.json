@@ -1,0 +1,16 @@
+{
+  "schema": "nexus.expected-dependencies.v1",
+  "benchmark": "b3-extension-plugin",
+  "dependencies": [
+    {
+      "source": "cpython:nexus_bench.b3_extension_plugin",
+      "target": "native:_nexus_bench_ext",
+      "mechanism": "direct"
+    },
+    {
+      "source": "native:_nexus_bench_ext",
+      "target": "native:nexus_transform_plugin",
+      "mechanism": "dynamic_load"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schema": "nexus.demo.benchmark-suite.v1",
+  "cases": [
+    {
+      "id": "b1-python-file",
+      "level": 1,
+      "name": "Python Shared File",
+      "design": "CPython producer -> shared file -> CPython consumer",
+      "runtimes": ["cpython"],
+      "mechanisms": ["file"],
+      "expected_interactions": 2,
+      "expected_processes": 1,
+      "expected_dependencies": [
+        {
+          "source": "cpython:nexus_bench.b1_python_file.producer",
+          "target": "cpython:nexus_bench.b1_python_file.consumer",
+          "mechanism": "file"
+        }
+      ]
+    },
+    {
+      "id": "b2-python-extension",
+      "level": 2,
+      "name": "Python-Extension Direct Call",
+      "design": "CPython package -> in-process C++ extension",
+      "runtimes": ["cpython", "native"],
+      "mechanisms": ["direct"],
+      "expected_interactions": 1,
+      "expected_processes": 1,
+      "expected_dependencies": [
+        {
+          "source": "cpython:nexus_bench.b2_python_extension",
+          "target": "native:_nexus_bench_ext",
+          "mechanism": "direct"
+        }
+      ]
+    },
+    {
+      "id": "b3-extension-plugin",
+      "level": 3,
+      "name": "Extension-Plugin Dynamic Load",
+      "design": "CPython package -> C++ extension -> dynamically loaded C++ plugin",
+      "runtimes": ["cpython", "native"],
+      "mechanisms": ["direct", "dynamic_load"],
+      "expected_interactions": 2,
+      "expected_processes": 1,
+      "expected_dependencies": [
+        {
+          "source": "cpython:nexus_bench.b3_extension_plugin",
+          "target": "native:_nexus_bench_ext",
+          "mechanism": "direct"
+        },
+        {
+          "source": "native:_nexus_bench_ext",
+          "target": "native:nexus_transform_plugin",
+          "mechanism": "dynamic_load"
+        }
+      ]
+    },
+    {
+      "id": "b4-extension-service",
+      "level": 4,
+      "name": "Extension-Service Round Trip",
+      "design": "CPython package -> C++ extension <-> C++ service -> dynamically loaded C++ plugin",
+      "runtimes": ["cpython", "native"],
+      "mechanisms": ["direct", "file", "socket", "dynamic_load"],
+      "expected_interactions": 10,
+      "expected_processes": 2,
+      "expected_dependencies": [
+        {
+          "source": "cpython:nexus_bench.b4_extension_service",
+          "target": "native:_nexus_bench_ext",
+          "mechanism": "direct"
+        },
+        {
+          "source": "cpython:nexus_bench.b4_extension_service",
+          "target": "native:_nexus_bench_ext",
+          "mechanism": "file"
+        },
+        {
+          "source": "native:_nexus_bench_ext",
+          "target": "native:nexus_demo_service",
+          "mechanism": "socket"
+        },
+        {
+          "source": "native:nexus_demo_service",
+          "target": "native:_nexus_bench_ext",
+          "mechanism": "socket"
+        },
+        {
+          "source": "native:nexus_demo_service",
+          "target": "native:nexus_transform_plugin",
+          "mechanism": "dynamic_load"
+        },
+        {
+          "source": "native:_nexus_bench_ext",
+          "target": "cpython:nexus_bench.b4_extension_service",
+          "mechanism": "file"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "nexus.expected-dependencies.v1",
+  "benchmark": "b2-python-extension",
+  "dependencies": [
+    {
+      "source": "cpython:nexus_bench.b2_python_extension",
+      "target": "native:_nexus_bench_ext",
+      "mechanism": "direct"
+    }
+  ]
+}

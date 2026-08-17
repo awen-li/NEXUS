@@ -1,0 +1,36 @@
+{
+  "schema": "nexus.expected-dependencies.v1",
+  "benchmark": "b4-extension-service",
+  "dependencies": [
+    {
+      "source": "cpython:nexus_bench.b4_extension_service",
+      "target": "native:_nexus_bench_ext",
+      "mechanism": "direct"
+    },
+    {
+      "source": "cpython:nexus_bench.b4_extension_service",
+      "target": "native:_nexus_bench_ext",
+      "mechanism": "file"
+    },
+    {
+      "source": "native:_nexus_bench_ext",
+      "target": "native:nexus_demo_service",
+      "mechanism": "socket"
+    },
+    {
+      "source": "native:nexus_demo_service",
+      "target": "native:_nexus_bench_ext",
+      "mechanism": "socket"
+    },
+    {
+      "source": "native:nexus_demo_service",
+      "target": "native:nexus_transform_plugin",
+      "mechanism": "dynamic_load"
+    },
+    {
+      "source": "native:_nexus_bench_ext",
+      "target": "cpython:nexus_bench.b4_extension_service",
+      "mechanism": "file"
+    }
+  ]
+}

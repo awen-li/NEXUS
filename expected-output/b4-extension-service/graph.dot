@@ -1,0 +1,16 @@
+digraph nexus_demo {
+  rankdir=LR;
+  graph [fontname="Helvetica"];
+  node [fontname="Helvetica"];
+  edge [fontname="Helvetica"];
+  "cpython:nexus_bench.b4_extension_service" [shape=box,style=rounded];
+  "native:_nexus_bench_ext" [shape=box,style=rounded];
+  "native:nexus_demo_service" [shape=box,style=rounded];
+  "native:nexus_transform_plugin" [shape=box,style=rounded];
+  "cpython:nexus_bench.b4_extension_service" -> "native:_nexus_bench_ext" [label="direct"];
+  "cpython:nexus_bench.b4_extension_service" -> "native:_nexus_bench_ext" [label="file"];
+  "native:_nexus_bench_ext" -> "cpython:nexus_bench.b4_extension_service" [label="file"];
+  "native:_nexus_bench_ext" -> "native:nexus_demo_service" [label="socket"];
+  "native:nexus_demo_service" -> "native:_nexus_bench_ext" [label="socket"];
+  "native:nexus_demo_service" -> "native:nexus_transform_plugin" [label="dynamic_load"];
+}
