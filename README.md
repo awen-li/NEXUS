@@ -132,3 +132,7 @@ Set `NEXUS_BUILD_DIR` to use a non-default build directory. Set
 NEXUS is therefore evidence for the factorized design and cross-process
 composition path, not a claim of complete architecture recovery or
 production-ready system capture.
+
+## License
+
+NEXUS is released under the [MIT License](LICENSE).
